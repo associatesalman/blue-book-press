@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@import "./variables.css";
+@import "./typography.css";
+@import "./animations.css";
+@import "./portfolio.css";

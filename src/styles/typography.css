@@ -1,0 +1,58 @@
+/* Base typography — large, calm and readable. */
+@layer base {
+  html {
+    font-size: 112.5%; /* 18px base */
+    /*
+     * No CSS scroll-behavior: smooth here. Next.js 16 scrolls new pages into
+     * place with scrollIntoView, and CSS smoothing turns those calls into
+     * competing animations that can land mid-page. Smoothness comes from
+     * Lenis (components/common/Providers), which also eases anchor links.
+     */
+    scroll-padding-top: calc(var(--spacing-header) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    /* Slide-in reveals start off-canvas; clip (unlike hidden) never breaks position: sticky. */
+    overflow-x: clip;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--brand-blue);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--brand-blue);
+    color: #fff;
+  }
+}
+
+/* Small uppercase label above section headings. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+

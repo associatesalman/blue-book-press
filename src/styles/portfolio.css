@@ -1,0 +1,136 @@
+/* ------------------------------------------------------------------
+   Portfolio sliders — CSS 3D books (components/portfolio/BookCoverflow).
+   The only 3D on the Portfolio page. Real covers stay crisp HTML images.
+   ------------------------------------------------------------------ */
+
+.coverflow {
+  --bw: clamp(150px, 21vw, 260px);
+  height: calc(var(--bw) * 1.5 + 5rem);
+  perspective: 1500px;
+  perspective-origin: 50% 40%;
+  transform-style: preserve-3d;
+}
+.coverflow--compact {
+  --bw: clamp(160px, 19vw, 250px);
+}
+
+.coverflow__slide {
+  position: absolute;
+  top: 1.5rem;
+  left: calc(50% - var(--bw) / 2);
+  transform-style: preserve-3d;
+}
+.coverflow__slide > button {
+  transform-style: preserve-3d;
+}
+
+.coverflow__shadow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.28), transparent);
+  pointer-events: none;
+}
+.coverflow__shadow--dark {
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.75), transparent);
+}
+
+.book3d {
+  --bd: calc(var(--bw) * 0.12);
+  position: relative;
+  width: var(--bw);
+  height: calc(var(--bw) * 1.5);
+  transform-style: preserve-3d;
+}
+.book3d > * {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.book3d__front {
+  inset: 0;
+  overflow: hidden;
+  border-radius: 1px 3px 3px 1px;
+  transform: translateZ(calc(var(--bd) / 2));
+  background: #111;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08);
+}
+/* Hinge crease near the spine and a soft satin highlight. */
+.book3d__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 0.32) 0, rgb(255 255 255 / 0.14) 2.2%, rgb(0 0 0 / 0.12) 4.5%, transparent 9%),
+    linear-gradient(115deg, transparent 40%, rgb(255 255 255 / 0.07) 55%, transparent 70%);
+}
+
+.book3d__back {
+  inset: 0;
+  border-radius: 3px 1px 1px 3px;
+  transform: rotateY(180deg) translateZ(calc(var(--bd) / 2));
+  background: #141414;
+}
+
+.book3d__spine {
+  top: 0;
+  height: 100%;
+  width: var(--bd);
+  left: calc(50% - var(--bd) / 2);
+  transform: rotateY(-90deg) translateZ(calc(var(--bw) / 2));
+  background-color: #111;
+  background-size: auto 100%;
+  background-position: left center;
+}
+.book3d__spine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(0 0 0 / 0.55), rgb(255 255 255 / 0.1) 40%, rgb(0 0 0 / 0.4));
+}
+
+.book3d__pages {
+  top: 1.2%;
+  height: 97.6%;
+  width: calc(var(--bd) - 2px);
+  left: calc(50% - (var(--bd) - 2px) / 2);
+  transform: rotateY(90deg) translateZ(calc(var(--bw) / 2 - 3px));
+  background: repeating-linear-gradient(90deg, #f6f3ec 0 1px, #ddd8cc 1px 2px);
+}
+
+.book3d__top,
+.book3d__bottom {
+  left: 0;
+  width: calc(100% - 3px);
+  height: calc(var(--bd) - 2px);
+  top: calc(50% - (var(--bd) - 2px) / 2);
+  background: repeating-linear-gradient(0deg, #f6f3ec 0 1px, #ddd8cc 1px 2px);
+}
+.book3d__top {
+  transform: rotateX(90deg) translateZ(calc(var(--bw) * 0.75 - 2px));
+}
+.book3d__bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--bw) * 0.75 - 2px));
+}
+
+/* Book detail dialog entrance. */
+.book-dialog[open] {
+  animation: book-dialog-in 0.45s var(--ease-soft);
+}
+.book-dialog[open]::backdrop {
+  animation: book-dialog-fade 0.35s ease;
+}
+@keyframes book-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+}
+@keyframes book-dialog-fade {
+  from {
+    opacity: 0;
+  }
+}
